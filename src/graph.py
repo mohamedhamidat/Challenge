@@ -20,8 +20,7 @@ def dijkstra(graph, initial):
     Dijkstra's algorithm solves the shortest path from one node 
     to all the other nodes in a weighted graph with no negative weight edges. 
     """
-
-
+    
     visited_nodes = {initial: 0}
     path = {}
 
@@ -100,13 +99,26 @@ def get_possible_paths(graph, _from, _to):
     """
     # Mark all the nodes as not visited
     visited = []
-    cost = {}
 
     # Create an array to store paths
-    path = []
     paths = []
 
     # Call the recursive helper function to get all paths
-    get_all_paths_helper(graph, _from, _to, visited, path, paths)
+    get_all_paths_helper(graph, _from, _to, visited, [], paths)
 
     return paths
+
+def has_cycles(graph):
+    """Return True if graph has a cycle.
+    """
+    path = set()
+
+    def visit(node):
+        path.add(node)
+        for neighbour in graph.edges[node]:
+            if neighbour in path or visit(neighbour):
+                return True
+        path.remove(node)
+        return False
+
+    return any(visit(node) for node in graph.nodes)

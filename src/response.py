@@ -3,7 +3,7 @@ import json
 from collections import OrderedDict
 from json_parser import get_queries
 import graph_repository 
-from graph import get_possible_paths, get_shortest_path 
+from graph import get_possible_paths, get_shortest_path, has_cycles
 
 
 def get_response(query):
@@ -27,6 +27,10 @@ def get_response(query):
 
     #get the graph object from db (in this case just from xml)
     graph = graph_repository.get("graph_id")
+    
+    # ignore garph if it has cycles
+    if has_cycles(graph): 
+        return
 
     query_paths = get_queries(query, "paths")
     query_cheapest = get_queries(query, "cheapest")

@@ -3,7 +3,7 @@ import sys, os
 myPath = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, myPath + '/../src')
 
-from graph import Graph, get_possible_paths, get_shortest_path
+from graph import Graph, get_possible_paths, get_shortest_path, has_cycles
 import unittest
 
 class Test_Graph(unittest.TestCase):
@@ -47,6 +47,16 @@ class Test_Graph(unittest.TestCase):
 
         self.assertEqual([], path)
 
+    def test_is_cyclic(self): 
+        
+        #case graph is not cyclic
+        result1 = has_cycles(self.graph)
+        self.assertEqual(result1, False)
+
+        #case graph is cyclic
+        self.graph.add_edge('B', 'A', 10)
+        result2 = has_cycles(self.graph)        
+        self.assertEqual(result2, True)
 
 def main():
     unittest.main()
