@@ -11,8 +11,8 @@ def add(graph_xml):
     """
     add graph to db
     """ 
-    graph_id = get_item_from_root(graph_xml, "id")[0]
-    graph_name = get_item_from_root(graph_xml, "name")[0]
+    graph_id = get_item_from_root(graph_xml, "id")
+    graph_name = get_item_from_root(graph_xml, "name")
 
     #ORM.Add_Graph_To_Graph_TABLE(graph_id, graph_name)
     

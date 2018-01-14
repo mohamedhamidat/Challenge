@@ -8,6 +8,9 @@ def get_root(file_name):
     return root
 
 def get_item_from_root(root, item): 
+    """
+    return item value else None
+    """
     return  root.find(item).text if root.find(item) != None else None 
 
 def nodes_are_before_edges(root):
@@ -16,6 +19,9 @@ def nodes_are_before_edges(root):
     return False
 
 def get_nodes(root):
+    """
+    return list of tuples (node_id, node_name) of every node in nodes
+    """
     nodes = [node for node in root[2].findall('node')]
     _nodes = []
     for node in nodes: 
@@ -55,20 +61,20 @@ def edges_have_single_from_and_to_tags(root):
     return True
 
 def get_graph_from_root(root):
-    
+    """
+    return Graph Object
+    """
     graph_id = get_item_from_root(root, "id")
     graph_name = get_item_from_root(root, "name")
 
     graph = Graph(graph_id, graph_name)
     
-
     nodes = get_nodes(root)
     edges = get_edges(root)
 
     for node in nodes:
         node_id, node_name = node 
         graph.add_node(node_name)
-    
 
     for node in edges:
         node_id, from_node, to_node, cost = node
