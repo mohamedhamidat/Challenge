@@ -27,27 +27,27 @@ def dijkstra(graph, initial):
     nodes = set(graph.nodes)
 
     while nodes:
-        closet_node = None
+        closest_node = None
         for node in nodes:
             if node in visited_nodes:
-                if closet_node is None:
-                    closet_node = node
-                elif visited_nodes[node] < visited_nodes[closet_node]:
-                    closet_node = node
-        if closet_node is None:
+                if closest_node is None:
+                    closest_node = node
+                elif visited_nodes[node] < visited_nodes[closest_node]:
+                    closest_node = node
+        if closest_node is None:
             break
 
-        nodes.remove(closet_node)
-        current_weight = visited_nodes[closet_node]
+        nodes.remove(closest_node)
+        current_weight = visited_nodes[closest_node]
 
-        for edge in graph.edges[closet_node]:
+        for edge in graph.edges[closest_node]:
             try:
-                weight = current_weight + graph.costs[(closet_node, edge)]
+                weight = current_weight + graph.costs[(closest_node, edge)]
             except:
                 continue
             if edge not in visited_nodes or weight < visited_nodes[edge]:
                 visited_nodes[edge] = weight
-                path[edge] = closet_node
+                path[edge] = closest_node
 
     return visited_nodes, path
 
@@ -81,11 +81,11 @@ def get_all_paths_helper(graph, _from, to, visited, path, paths):
         path = path + [to]
         paths.append(path)
     else:
-        # If current vertex is not destination
+        # If current node is not destination
         #Recur for all the nodes adjacent to this node
-        for destination in graph.edges[_from]:
-            if destination not in visited:
-                get_all_paths_helper(graph, destination, to, visited, path, paths)
+        for neighbour in graph.edges[_from]:
+            if neighbour not in visited:
+                get_all_paths_helper(graph, neighbour, to, visited, path, paths)
                     
     # Remove current node from path[] and mark it as unvisited
     path.pop()
