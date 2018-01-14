@@ -8,7 +8,7 @@ def get_root(file_name):
     return root
 
 def get_item_from_root(root, item): 
-    return [found_item.text for found_item in root.findall(item)]
+    return  root.find(item).text if root.find(item) != None else None 
 
 def nodes_are_before_edges(root):
     if root[2].tag == 'nodes' and root[3].tag == 'edges':
@@ -56,8 +56,8 @@ def edges_have_single_from_and_to_tags(root):
 
 def get_graph_from_root(root):
     
-    graph_id = get_item_from_root(root, "id")[0]
-    graph_name = get_item_from_root(root, "name")[0]
+    graph_id = get_item_from_root(root, "id")
+    graph_name = get_item_from_root(root, "name")
 
     graph = Graph(graph_id, graph_name)
     

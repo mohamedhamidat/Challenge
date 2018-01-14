@@ -31,8 +31,8 @@ class Test_xml_parser(unittest.TestCase):
         id = get_item_from_root(root, 'id')
         name = get_item_from_root(root, 'name')
 
-        self.assertEqual(id, ['g0'])
-        self.assertEqual(name , ['The Graph Name'])
+        self.assertEqual(id, 'g0')
+        self.assertEqual(name , 'The Graph Name')
     
     def test_get_item_from_root_when_id_names_doesnt_exist(self):
         xml_string = """
@@ -45,8 +45,8 @@ class Test_xml_parser(unittest.TestCase):
         id = get_item_from_root(root, 'id')
         name = get_item_from_root(root, 'name')
 
-        self.assertEqual(id, [])
-        self.assertEqual(name , [])
+        self.assertEqual(id, None)
+        self.assertEqual(name , None)
     
     def test_nodes_are_before_edges_should_return_True(self):    
         xml_string = """
