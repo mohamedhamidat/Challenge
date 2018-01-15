@@ -9,6 +9,8 @@ def process(file_name):
             graph_xml = get_root(file_name)
             if is_valid_graph(graph_xml):
                 graph_repository.add(graph_xml)
+            else
+                print("the xml file is not valid")
         else:
             print(file_name + " file does not exisit")
     except Exception as e:    
